@@ -23,7 +23,11 @@ class CalculatorController extends Controller
 
         $result = $number1 + $number2;
 
-        dd($result);
+        // dd($result);
+
+        return $result;
+
+
 
 
     }

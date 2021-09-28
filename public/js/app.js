@@ -2113,17 +2113,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      form: {
+        number1: 2,
+        number2: 3
+      },
       result: 0
     };
   },
   methods: {
     calculate: function calculate() {
-      axios.post("/api/calculator").then(function (response) {
-        this.result = response.data.result;
-      });
+      var _this = this;
+
+      axios.post("/api/calculator", this.form).then(function (response) {
+        _this.result = response.data;
+      }); // console.log(this.form.number1);
+      // console.log(this.form.number2);
     }
   }
 });
@@ -37919,72 +37930,120 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "grid items-start border bg-putih border-abu-terang w-px-1 w-740 h-406 place-items-center"
-      },
-      [
+  return _c(
+    "div",
+    {
+      staticClass:
+        "grid items-start border bg-putih border-abu-terang w-px-1 w-740 h-406 place-items-center"
+    },
+    [
+      _c("div", [
+        _c(
+          "div",
+          {
+            staticClass: "w-56 mb-2 text-center text-abu-gelap pt-7 font-varela"
+          },
+          [_vm._v("\n            Enter the numbers\n        ")]
+        ),
+        _vm._v(" "),
         _c("div", [
-          _c(
-            "div",
-            {
-              staticClass:
-                "w-56 mb-2 text-center text-abu-gelap pt-7 font-varela"
-            },
-            [_vm._v("\n            Enter the numbers\n        ")]
-          ),
-          _vm._v(" "),
-          _c("div", [
-            _c("input", {
-              staticClass: "w-56 pt-2 pb-2 pl-2 my-1 border border-abu-terang",
-              attrs: { type: "text", name: "number1", placeholder: "number 1" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("input", {
-              staticClass: "w-56 pt-2 pb-2 pl-2 my-1 border border-abu-terang",
-              attrs: { type: "text", name: "number2", placeholder: "number 2" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("input", {
-              staticClass: "w-56 py-2 my-3 bg-merah text-putih",
-              attrs: { type: "button", value: "Sum" }
-            })
-          ])
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.number1,
+                expression: "form.number1"
+              }
+            ],
+            staticClass: "w-56 pt-2 pb-2 pl-2 my-1 border border-abu-terang",
+            attrs: { type: "text", name: "number1", placeholder: "number 1" },
+            domProps: { value: _vm.form.number1 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "number1", $event.target.value)
+              }
+            }
+          })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "w-10/12 h-px bg-merah" }),
+        _c("div", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.number2,
+                expression: "form.number2"
+              }
+            ],
+            staticClass: "w-56 pt-2 pb-2 pl-2 my-1 border border-abu-terang",
+            attrs: { type: "text", name: "number2", placeholder: "number 2" },
+            domProps: { value: _vm.form.number2 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "number2", $event.target.value)
+              }
+            }
+          })
+        ]),
         _vm._v(" "),
         _c("div", [
-          _c(
-            "div",
-            { staticClass: "w-56 mb-2 text-center text-abu-gelap pt-7" },
-            [_vm._v("\n            Results\n        ")]
-          ),
-          _vm._v(" "),
-          _c("div", [
-            _c("input", {
-              staticClass: "w-56 pt-2 pb-2 pl-2 my-1 border border-abu-terang",
-              attrs: { type: "text", name: "number1" }
-            })
-          ])
+          _c("input", {
+            staticClass: "w-56 py-2 my-3 bg-merah text-putih",
+            attrs: { type: "button", value: "Sum" },
+            on: {
+              click: function($event) {
+                return _vm.calculate()
+              }
+            }
+          })
         ])
-      ]
-    )
-  }
-]
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-10/12 h-px bg-merah" }),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "div",
+          { staticClass: "w-56 mb-2 text-center text-abu-gelap pt-7" },
+          [_vm._v("\n            Results\n        ")]
+        ),
+        _vm._v(" "),
+        _c("div", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.result,
+                expression: "result"
+              }
+            ],
+            staticClass: "w-56 pt-2 pb-2 pl-2 my-1 border border-abu-terang",
+            attrs: { type: "text", name: "number1" },
+            domProps: { value: _vm.result },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.result = $event.target.value
+              }
+            }
+          })
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
