@@ -17,10 +17,6 @@ module.exports = {
             }
         },
 
-        fontfamily: {
-            varela: '"Varela Round"'
-        },
-
         extend: {
             width: {
                 740: "740px",
@@ -28,6 +24,9 @@ module.exports = {
             },
             height: {
                 406: "406px"
+            },
+            fontfamily: {
+                varela: ["Varela Round"]
             }
         }
     },

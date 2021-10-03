@@ -3,7 +3,7 @@ import Calculator from "./pages/Calculator.vue";
 
 const routes = [
     {
-        path: "/calculator",
+        path: "/",
         component: Calculator,
         name: "calculator"
     }

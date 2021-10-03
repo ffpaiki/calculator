@@ -2117,22 +2117,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       form: {
-        number1: 2,
-        number2: 3
+        number1: 0,
+        number2: 0,
+        error_number1: null,
+        error_number2: null
       },
       result: 0
     };
   },
+  props: ["errors"],
   methods: {
     calculate: function calculate() {
       var _this = this;
 
       axios.post("/api/calculator", this.form).then(function (response) {
-        _this.result = response.data;
+        _this.result = response.data.result;
+      })["catch"](function (error) {
+        console.error(1);
+        _this.result = error.response.data.e.number1;
+        _this.form.error_number2 = response.data.e.number2;
       }); // console.log(this.form.number1);
       // console.log(this.form.number2);
     }
@@ -2290,7 +2299,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [{
-  path: "/calculator",
+  path: "/",
   component: _pages_Calculator_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
   name: "calculator"
 }];
@@ -37941,7 +37950,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "w-56 mb-2 text-center text-abu-gelap pt-7 font-varela"
+            staticClass: "w-56 mb-2 text-center font-varela text-abu-gelap pt-7"
           },
           [_vm._v("\n            Enter the numbers\n        ")]
         ),
@@ -37967,7 +37976,9 @@ var render = function() {
                 _vm.$set(_vm.form, "number1", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.form.error_number1))])
         ]),
         _vm._v(" "),
         _c("div", [
@@ -37991,7 +38002,9 @@ var render = function() {
                 _vm.$set(_vm.form, "number2", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.form.error_number2))])
         ]),
         _vm._v(" "),
         _c("div", [
@@ -38027,7 +38040,7 @@ var render = function() {
               }
             ],
             staticClass: "w-56 pt-2 pb-2 pl-2 my-1 border border-abu-terang",
-            attrs: { type: "text", name: "number1" },
+            attrs: { type: "text", name: "result" },
             domProps: { value: _vm.result },
             on: {
               input: function($event) {
